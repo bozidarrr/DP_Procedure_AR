@@ -15,8 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EntryPoint.cpp">
+    <Text Include="ulaz1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GlavniProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="KonzolniParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FajlParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KonzolniParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FajlParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

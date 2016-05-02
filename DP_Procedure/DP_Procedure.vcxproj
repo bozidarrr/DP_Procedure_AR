@@ -78,7 +78,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EntryPoint.cpp" />
+    <ClCompile Include="FajlParser.cpp" />
+    <ClCompile Include="GlavniProgram.cpp" />
+    <ClCompile Include="KonzolniParser.cpp" />
+    <ClCompile Include="Loger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ulaz1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FajlParser.h" />
+    <ClInclude Include="KonzolniParser.h" />
+    <ClInclude Include="Loger.h" />
+    <ClInclude Include="Parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

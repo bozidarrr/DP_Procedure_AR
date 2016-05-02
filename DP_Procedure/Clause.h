@@ -24,6 +24,7 @@ public:
 	bool isTautology() const;
 	bool isContradiction() const;
 	bool containsLiteral(const Literal & l) const;
+	const std::set<Literal> & getLiterals() const;
 	friend std::ostream &operator<<(std::ostream &output, const Clause & c);
 private:
 	std::set<Literal> literals;

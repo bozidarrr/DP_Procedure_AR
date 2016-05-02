@@ -26,6 +26,7 @@ bool ClauseList::resolve()
 	if (!preprocess())
 		return  false;
 	findPositiveLiterals();
+	std::cout << *this << std::endl;
 	// ako se ne moze generisati vise rezolventi prijaviti zadovoljivost
 	for (Literal l : positiveLiterals)
 	{
@@ -35,6 +36,7 @@ bool ClauseList::resolve()
 		if (!resolve(l))
 			return false;
 	}
+	std::cout << "out of" << std::endl;
 	return clauses.empty();
 }
 //i ovo moze efikasnije sigurno
@@ -43,7 +45,7 @@ bool ClauseList::resolve(const Literal & l)
 	std::set<Clause> C1, C2;
 	if (!partition(l, C1, C2))
 		return true;
-			//std::cout << "Resolving with literal : " << l << std::endl;
+	std::cout << "Resolving with literal : " << l << std::endl;
 	for (auto c1 : C1)
 		for (auto c2 : C2)
 			if (!resolveClauses(l, c1, c2))
@@ -56,7 +58,10 @@ bool ClauseList::resolveClauses(const Literal & l, const Clause & c1, const Clau
 {
 	Clause resolvent = Clause::resolve(l, c1, c2);
 	if (resolvent.isContradiction())
+	{
+		std::cout << "got a contradiction" << std::endl;
 		return false;
+	}
 	if (!resolvent.isTautology())
 		clauses.insert(resolvent);
 	return true;
@@ -83,13 +88,40 @@ bool ClauseList::removeClause(const Clause & c)
 bool ClauseList::eliminatePureLiterals()
 {
 	//remove pure literals from all clauses
-	std::set<Literal> literals;
-	//for (auto c : clauses)
-	//	for (auto l : c.getLiterals())
+	std::set<Literal> pureLiterals;
+	for (Clause c : clauses)
+		for (Literal l : c.getLiterals())
+		{
+		auto it = pureLiterals.find(l.getOpposite());
+		if (it == pureLiterals.end())
+			pureLiterals.insert(l);
+		else
+			pureLiterals.erase(it);
+		}
+
+	std::set<Clause> tmp;
+	
+	for (Clause c : clauses)
+	{
+		bool toAdd = true;
+		for (Literal l : pureLiterals)
+		{
+			if (c.containsLiteral(l))
+			{
+				toAdd = false;
+				break;
+			}
+		}
+		if (toAdd)
+			tmp.insert(c);
+	}
+	clauses = tmp;
+	return true;
 }
 //check for empty clauses or tautologies
 bool ClauseList::preprocess()
 {
+	eliminatePureLiterals();
 	for (auto c : clauses)
 	{
 		if (c.isTautology())

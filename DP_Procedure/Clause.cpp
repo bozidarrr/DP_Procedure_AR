@@ -107,6 +107,11 @@ bool Clause::containsLiteral(const Literal & l) const
 	return literals.find(l) != literals.end();
 }
 
+const std::set<Literal> & Clause::getLiterals() const
+{
+	return literals;
+}
+
 std::ostream &operator<<(std::ostream &output, const Clause & c)
 {
 	output << "[ ";

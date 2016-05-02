@@ -2,6 +2,7 @@
 #include<iostream>
 #include<sstream>
 #include<string>
+#include<thread>
 #include "Fajlparser.h"
 #include "KonzolniParser.h"
 #include "Loger.h"
@@ -31,7 +32,7 @@ bool daLiSteSigurni(const std::string & akcija)
  */
 int main(int argc, char *argv[])
 {
-    Loger dnevnik("..\\DP_proc.log");
+    Loger dnevnik("..\\DP_proc.log", "DP procedura zapoceta");
     std::cout << "Dobrodosli u program za demonstraciju DP procedure" << std::endl;
     Parser * parser;
     if (argc < 2)
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
             std::cout << "Navedite putanju:" << std::endl;
             std::cin >> putanja;
             dnevnik<<"Prosledjena putanja: "+ putanja;
-            parser = &FajlParser(putanja);
+            parser = new FajlParser(putanja);
             dnevnik<<"Kreiran fajl parser";
         }
         else // pretpostavljamo da korisnik zeli interaktivni mod
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
             std::cout << "U svakoj liniji treba da se nalazi po jedna klauza" << std::endl;
             std::cout << "Elementi svake klauze treba da budu razdvojeni zarezima." << std::endl;
             std::cout << "Negacija se navodi kao '!' ispred date klauze" << std::endl;
-            parser = &KonzolniParser();
+            parser = new KonzolniParser();
             dnevnik<<"Kreiran konzolni parser";
         }
     }
@@ -65,19 +66,24 @@ int main(int argc, char *argv[])
         ss << " , prvi argument: ";
         ss << argv[1];
         dnevnik << ss.str();
-        parser = &FajlParser(argv[1]);
+        parser = new FajlParser(argv[1]);
         dnevnik << "Kreiran parser za fajl";
     }
 
     if (parser->spreman())
     {
         dnevnik << "Parser je spreman, zapoceto parsiranje";
-        parser->parsiraj();
+        std::thread parserNit([parser]{parser->parsiraj(); });
+        std::cout << "Parsiranje u toku" << std::endl;
+        dnevnik << "Parsiranje u toku";
+        parserNit.join();
     }
     else
     {
         dnevnik << "!Parser nije bio spreman. Program ce biti ugasen";
+        exit;
     }
 
     dnevnik << "Rad zavrsen";
+    delete parser;
 }

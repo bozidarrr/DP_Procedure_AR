@@ -1,9 +1,9 @@
 #include "Loger.h"
 #include <ctime>
 #include <sstream>
-Loger::Loger(std::string putanja) :_pisac(putanja)
+Loger::Loger(std::string putanja, std::string aktivnost) :_pisac(putanja)
 {
-    _pisac << "[" << Loger::vremeSada() << "]: DP procedura zapoceta" << std::endl;
+    _pisac << "[" << Loger::vremeSada() << "]: "<<aktivnost<< std::endl;
 }
 
 Loger::~Loger()

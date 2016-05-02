@@ -86,6 +86,7 @@ bool ClauseList::eliminatePureLiterals()
 	std::set<Literal> literals;
 	//for (auto c : clauses)
 	//	for (auto l : c.getLiterals())
+    return true;
 }
 //check for empty clauses or tautologies
 bool ClauseList::preprocess()

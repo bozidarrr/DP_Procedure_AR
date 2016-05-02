@@ -1,6 +1,7 @@
 #pragma once
-#include<fstream>
+#include <fstream>
 #include "Parser.h"
+#include "Loger.h"
 class FajlParser : public Parser
 {
 public:
@@ -11,5 +12,5 @@ public:
     void parsiraj();
 private:
     std::fstream _ulazniFajl;
+    Loger _dnevnik;
 };
-

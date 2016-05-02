@@ -78,7 +78,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Clause.cpp" />
+    <ClCompile Include="ClauseList.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
+    <ClCompile Include="Literal.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Clause.h" />
+    <ClInclude Include="ClauseList.h" />
+    <ClInclude Include="Literal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

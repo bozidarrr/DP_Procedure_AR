@@ -82,6 +82,9 @@
     <ClCompile Include="GlavniProgram.cpp" />
     <ClCompile Include="KonzolniParser.cpp" />
     <ClCompile Include="Loger.cpp" />
+    <ClCompile Include="Clause.cpp" />
+    <ClCompile Include="ClauseList.cpp" />
+    <ClCompile Include="Literal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ulaz1.txt" />
@@ -91,6 +94,9 @@
     <ClInclude Include="KonzolniParser.h" />
     <ClInclude Include="Loger.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Clause.h" />
+    <ClInclude Include="ClauseList.h" />
+    <ClInclude Include="Literal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

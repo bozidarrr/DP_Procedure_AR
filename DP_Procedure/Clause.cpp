@@ -26,7 +26,7 @@ Clause& Clause::operator=(const Clause& other)
 bool Clause::operator<(const Clause& other) const
 {
 	return literals < other.literals;
-	
+
 
 }
 bool Clause::operator<=(const Clause& other) const
@@ -52,11 +52,10 @@ bool Clause::operator==(const Clause& other) const
 std::set<Literal> Clause::getPostiveLiterals() const
 {
 	std::set<Literal> p;
-	//auto it = std::copy_if(literals.begin(), literals.end(), p.begin(), [](Literal l){return l.isPositive(); });
 	for (auto l : literals)
 		if (l.isPositive())
 			p.insert(l);
-	return p; 
+	return p;
 }
 
 bool Clause::addLiteral(const Literal & l)
@@ -105,6 +104,11 @@ bool Clause::isContradiction() const
 bool Clause::containsLiteral(const Literal & l) const
 {
 	return literals.find(l) != literals.end();
+}
+
+const std::set<Literal> & Clause::getLiterals() const
+{
+	return literals;
 }
 
 std::ostream &operator<<(std::ostream &output, const Clause & c)

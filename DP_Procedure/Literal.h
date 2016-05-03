@@ -7,12 +7,14 @@ public:
 	Literal(const std::string & var, const bool value);
 	Literal(const Literal & literal);
 	~Literal();
+	/* Operatori poredjenja su neophodni za skup. */
 	Literal& operator=(const Literal& other);
 	bool operator<(const Literal& other) const;
 	bool operator<=(const Literal& other) const;
 	bool operator>(const Literal& other) const;
 	bool operator>=(const Literal& other) const;
 	bool operator==(const Literal& other) const;
+	/* Vraca suprotan literal. */
 	Literal getOpposite() const;
 	bool isPositive() const;
 	bool isNegative() const;

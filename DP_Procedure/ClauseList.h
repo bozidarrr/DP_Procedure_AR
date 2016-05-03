@@ -18,8 +18,10 @@ private:
 	bool preprocess();
 	bool eliminatePureLiterals();
 	bool partition(const Literal & l, std::set<Clause> & C1, std::set<Clause> & C2);
-	void findPositiveLiterals();
+	//void findPositiveLiterals();
+	void findAllLiterals();
 	std::set<Clause> clauses;
-	std::set<Literal> positiveLiterals;
+	//std::set<Literal> positiveLiterals;
+	std::set<Literal> literals;
 };
 

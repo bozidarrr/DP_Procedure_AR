@@ -6,7 +6,7 @@ ClauseList::ClauseList()
 ClauseList::ClauseList(std::set<Clause> clauses) : clauses(clauses)
 {
 }
-
+/*
 void ClauseList::findPositiveLiterals()
 {
 	for (Clause c : clauses)
@@ -14,6 +14,16 @@ void ClauseList::findPositiveLiterals()
 		for (Literal l : c.getPostiveLiterals())
 			positiveLiterals.insert(l);
 		//positiveLiterals.insert(c.getPostiveLiterals().begin(), c.getPostiveLiterals().end());
+	}
+}
+*/
+// zapravo sve promenljive
+void ClauseList::findAllLiterals()
+{
+	for (Clause c : clauses)
+	{
+		for (Literal l : c.getLiterals())
+			literals.insert((l.isNegative()) ? l.getOpposite() : l);
 	}
 }
 
@@ -25,10 +35,9 @@ bool ClauseList::resolve()
 {
 	if (!preprocess())
 		return  false;
-	findPositiveLiterals();
-	std::cout << *this << std::endl;
-	// ako se ne moze generisati vise rezolventi prijaviti zadovoljivost
-	for (Literal l : positiveLiterals)
+	findAllLiterals();
+
+	for (Literal l : literals)
 	{
 		if (clauses.empty())
 			return true;
@@ -36,20 +45,21 @@ bool ClauseList::resolve()
 		if (!resolve(l))
 			return false;
 	}
-	std::cout << "out of" << std::endl;
 	return clauses.empty();
 }
 //i ovo moze efikasnije sigurno
 bool ClauseList::resolve(const Literal & l)
 {
+	std::cout << "Resolving with literal : " << l << std::endl;
 	std::set<Clause> C1, C2;
 	if (!partition(l, C1, C2))
 		return true;
-	std::cout << "Resolving with literal : " << l << std::endl;
+	
 	for (auto c1 : C1)
 		for (auto c2 : C2)
 			if (!resolveClauses(l, c1, c2))
 				return false;
+	std::cout << "after resoluition " << *this << std::endl;
 	return true;
 }
 
@@ -59,7 +69,7 @@ bool ClauseList::resolveClauses(const Literal & l, const Clause & c1, const Clau
 	Clause resolvent = Clause::resolve(l, c1, c2);
 	if (resolvent.isContradiction())
 	{
-		std::cout << "got a contradiction" << std::endl;
+		//std::cout << "got a contradiction" << std::endl;
 		return false;
 	}
 	if (!resolvent.isTautology())
@@ -121,7 +131,7 @@ bool ClauseList::eliminatePureLiterals()
 //check for empty clauses or tautologies
 bool ClauseList::preprocess()
 {
-	eliminatePureLiterals();
+	//eliminatePureLiterals();
 	for (auto c : clauses)
 	{
 		if (c.isTautology())
@@ -148,11 +158,9 @@ bool ClauseList::partition(const Literal & l, std::set<Clause> & C1, std::set<Cl
 			tmp.erase(tmp.find(c));
 		}
 	}
+	clauses = tmp;
 	if (!C1.empty() && !C2.empty())
-	{
-		clauses = tmp;
 		return true;
-	}
 	return false;
 }
 

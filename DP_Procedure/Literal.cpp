@@ -1,6 +1,5 @@
 #include "Literal.h"
 
-
 Literal::Literal(const std::string & var, const bool value) : var(var), value(value)
 {
 }
@@ -27,7 +26,7 @@ Literal Literal::getOpposite() const
 {
 	return Literal(var, !value);
 }
-//verovatno nam i ne treba :) 
+
 bool Literal::isPositive() const
 {
 	return value == true;
@@ -76,7 +75,7 @@ bool Literal::operator==(const Literal& other) const
 std::ostream &operator<<(std::ostream &output, const Literal & l)
 {
 	if (!l.value)
-		output << "~";
+		output << "!";
 	output << l.var;
 	return output;
 }

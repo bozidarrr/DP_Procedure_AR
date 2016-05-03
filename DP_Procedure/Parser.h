@@ -1,10 +1,13 @@
 #pragma once
 #include<string>
+#include"Clause.h"
+#include "Loger.h"
 class Parser
 {
 public:
-    virtual std::string sledecaLinija() = 0;
+    virtual std::pair<Clause,bool> sledecaKlauza() = 0;
     virtual bool spreman() = 0;
-    virtual void parsiraj() = 0;
+    virtual std::set<Clause> parsiraj() = 0;
+    std::string trim(const std::string& str, const std::string& whitespace = " \t");
 };
 

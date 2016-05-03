@@ -7,10 +7,10 @@ class FajlParser : public Parser
 public:
     FajlParser(std::string putanja);
     ~FajlParser();
-    std::string sledecaLinija();
     bool spreman();
-    void parsiraj();
+    std::set<Clause> parsiraj();
 private:
+    std::pair<Clause,bool> sledecaKlauza();
     std::fstream _ulazniFajl;
     Loger _dnevnik;
 };

@@ -6,7 +6,7 @@
 #include "Fajlparser.h"
 #include "KonzolniParser.h"
 #include "Loger.h"
-
+#include "ClauseList.h"
 /**
  Funkcija koja sluzi za ispitivanje da li korisnik zeli da nastavi sa radom
  Vraca tacno, ukoliko je odgovor 'da', netacno ukoliko je 'ne', beskonacno ponavljajuci petlju dok ne dobije jedan od ova dva odgovora
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     Parser * parser;
     if (argc < 2)
     {
-        dnevnik<<"?Nisu dati ulazni argumenti";
+        dnevnik << TipPoruke::Upozorenje << "Nisu dati ulazni argumenti\n";
         if (daLiSteSigurni("navedete putanju do fajla u kojem se nalaze ulazni podaci"))
         {
             std::string putanja;
@@ -50,10 +50,6 @@ int main(int argc, char *argv[])
         else // pretpostavljamo da korisnik zeli interaktivni mod
         {
             dnevnik<<"Korisnik zeli interaktivni mod";
-            std::cout << "Odabrali ste rad u interaktivnom modu." << std::endl;
-            std::cout << "U svakoj liniji treba da se nalazi po jedna klauza" << std::endl;
-            std::cout << "Elementi svake klauze treba da budu razdvojeni zarezima." << std::endl;
-            std::cout << "Negacija se navodi kao '!' ispred date klauze" << std::endl;
             parser = new KonzolniParser();
             dnevnik<<"Kreiran konzolni parser";
         }
@@ -69,21 +65,24 @@ int main(int argc, char *argv[])
         parser = new FajlParser(argv[1]);
         dnevnik << "Kreiran parser za fajl";
     }
-
+    ClauseList listaKlauza;
     if (parser->spreman())
     {
-        dnevnik << "Parser je spreman, zapoceto parsiranje";
-        std::thread parserNit([parser]{parser->parsiraj(); });
-        std::cout << "Parsiranje u toku" << std::endl;
-        dnevnik << "Parsiranje u toku";
-        parserNit.join();
+        dnevnik<< "Parser je spreman, zapoceto parsiranje";
+        listaKlauza = ClauseList(parser->parsiraj());
+        dnevnik << "Parsiranje zavrseno";
     }
     else
     {
-        dnevnik << "!Parser nije bio spreman. Program ce biti ugasen";
-        exit;
+        delete parser;
+        dnevnik << TipPoruke::Greska <<"Parser nije bio spreman. Program ce biti ugasen";
+        exit(1);
     }
+    delete parser;
+    dnevnik << "Ispis rezultata";
+
+    std::cout << listaKlauza;
 
     dnevnik << "Rad zavrsen";
-    delete parser;
+    system("Pause");
 }

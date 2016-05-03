@@ -6,8 +6,8 @@ class KonzolniParser :
 public:
     KonzolniParser();
     ~KonzolniParser();
-    std::string sledecaLinija();
+    std::pair<Clause,bool> sledecaKlauza();
     bool spreman();
-    void parsiraj();
+    std::set<Clause> parsiraj();
 };
 

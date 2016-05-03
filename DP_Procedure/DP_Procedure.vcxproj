@@ -85,6 +85,7 @@
     <ClCompile Include="Clause.cpp" />
     <ClCompile Include="ClauseList.cpp" />
     <ClCompile Include="Literal.cpp" />
+    <ClCompile Include="Parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ulaz1.txt" />

@@ -1,2 +1,9 @@
-ovo je test fajl
-cisto ovako da vidimo kako radi
+; Ovo je test fajl
+; Koji treba da demonstrira rad ovog programa
+; Linije koje pocinju sa ';' su komentari
+; U ostalim linijama, treba navesti klauze
+; Literali u klauzama treba da budu razdvojeni zarezima, a svaki negativan literal treba da pocinje sa znakom '!'
+p, !q ,r ,!s
+	zika	,	mika	,		!pera
+	zika , mika, !pera
+!p,q,r,!t

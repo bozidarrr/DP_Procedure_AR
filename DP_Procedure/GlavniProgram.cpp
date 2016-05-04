@@ -81,8 +81,18 @@ int main(int argc, char *argv[])
     delete parser;
     dnevnik << "Ispis rezultata";
 
-    std::cout << listaKlauza;
+    //std::cout << listaKlauza << std::endl;
+
+	bool zadovoljiva = listaKlauza.resolve();
+
+	if (zadovoljiva)
+		//std::cout << "Formula je ZADOVOLJIVA" << std::endl;
+		dnevnik << "Formula je ZADOVOLJIVA";
+	else
+		//std::cout << "Formula NIJE ZADOVOLJIVA" << std::endl;
+		dnevnik << "Formula NIJE ZADOVOLJIVA";
 
     dnevnik << "Rad zavrsen";
-    system("Pause");
+	std::cout << "Rad zavrsen" << std::endl;
+    //system("Pause");
 }

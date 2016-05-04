@@ -47,10 +47,10 @@ bool ClauseList::resolve()
 	}
 	return clauses.empty();
 }
-//i ovo moze efikasnije sigurno
+
 bool ClauseList::resolve(const Literal & l)
 {
-	std::cout << "Resolving with literal : " << l << std::endl;
+	//std::cout << "Resolving with literal : " << l << std::endl;
 	std::set<Clause> C1, C2;
 	if (!partition(l, C1, C2))
 		return true;
@@ -59,17 +59,14 @@ bool ClauseList::resolve(const Literal & l)
 		for (auto c2 : C2)
 			if (!resolveClauses(l, c1, c2))
 				return false;
-	std::cout << "after resoluition " << *this << std::endl;
 	return true;
 }
 
-// c1 contains l, c2 contains ~l
 bool ClauseList::resolveClauses(const Literal & l, const Clause & c1, const Clause & c2)
 {
 	Clause resolvent = Clause::resolve(l, c1, c2);
 	if (resolvent.isContradiction())
 	{
-		//std::cout << "got a contradiction" << std::endl;
 		return false;
 	}
 	if (!resolvent.isTautology())
@@ -94,7 +91,7 @@ bool ClauseList::removeClause(const Clause & c)
 	clauses.erase(it);
 	return true;
 }
-
+/*
 bool ClauseList::eliminatePureLiterals()
 {
 	//remove pure literals from all clauses
@@ -128,10 +125,9 @@ bool ClauseList::eliminatePureLiterals()
 	clauses = tmp;
 	return true;
 }
-//check for empty clauses or tautologies
+*/
 bool ClauseList::preprocess()
 {
-	//eliminatePureLiterals();
 	for (auto c : clauses)
 	{
 		if (c.isTautology())

@@ -1,0 +1,4 @@
+; Primer nezadovoljive formule
+p, q  
+!p,q
+!q, 

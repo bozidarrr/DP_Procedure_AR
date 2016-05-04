@@ -84,7 +84,7 @@ Clause Clause::resolve(const Literal & l, const Clause & c1, const Clause & c2)
 	resolvent.removeLiteral(l.getOpposite());
 	return resolvent;
 }
-// moze efikasnije verovatno
+
 bool Clause::isTautology() const
 {
 	if (literals.empty())

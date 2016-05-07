@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     Loger dnevnik("..\\DP_proc.log", "DP procedura zapoceta");
     std::cout << "Dobrodosli u program za demonstraciju DP procedure" << std::endl;
     Parser * parser;
+    bool interactiveMode = false;
     if (argc < 2)
     {
         dnevnik << TipPoruke::Upozorenje << "Nisu dati ulazni argumenti\n";
@@ -43,15 +44,16 @@ int main(int argc, char *argv[])
             std::string putanja;
             std::cout << "Navedite putanju:" << std::endl;
             std::cin >> putanja;
-            dnevnik<<"Prosledjena putanja: "+ putanja;
+            dnevnik << "Prosledjena putanja: " + putanja;
             parser = new FajlParser(putanja);
-            dnevnik<<"Kreiran fajl parser";
+            dnevnik << "Kreiran fajl parser";
         }
         else // pretpostavljamo da korisnik zeli interaktivni mod
         {
-            dnevnik<<"Korisnik zeli interaktivni mod";
+            interactiveMode = true;
+            dnevnik << "Korisnik zeli interaktivni mod";
             parser = new KonzolniParser();
-            dnevnik<<"Kreiran konzolni parser";
+            dnevnik << "Kreiran konzolni parser";
         }
     }
     else
@@ -68,31 +70,45 @@ int main(int argc, char *argv[])
     ClauseList listaKlauza;
     if (parser->spreman())
     {
-        dnevnik<< "Parser je spreman, zapoceto parsiranje";
+        dnevnik << "Parser je spreman, zapoceto parsiranje";
         listaKlauza = ClauseList(parser->parsiraj());
+        delete parser;
         dnevnik << "Parsiranje zavrseno";
     }
     else
     {
         delete parser;
-        dnevnik << TipPoruke::Greska <<"Parser nije bio spreman. Program ce biti ugasen";
+        dnevnik << TipPoruke::Greska << "Parser nije bio spreman. Program ce biti ugasen";
         exit(1);
     }
-    delete parser;
+
     dnevnik << "Ispis rezultata";
 
-    //std::cout << listaKlauza << std::endl;
+    if (interactiveMode)
+    {
+        std::cout << listaKlauza << std::endl;
+    }
 
-	bool zadovoljiva = listaKlauza.resolve();
+    bool zadovoljiva = listaKlauza.resolve();
 
-	if (zadovoljiva)
-		//std::cout << "Formula je ZADOVOLJIVA" << std::endl;
-		dnevnik << "Formula je ZADOVOLJIVA";
-	else
-		//std::cout << "Formula NIJE ZADOVOLJIVA" << std::endl;
-		dnevnik << "Formula NIJE ZADOVOLJIVA";
+    if (zadovoljiva)
+    {
+        if (interactiveMode)
+            std::cout << "Formula je ZADOVOLJIVA" << std::endl;
+        dnevnik << "Formula je ZADOVOLJIVA";
+    }
+    else
+    {
+        if (interactiveMode)
+            std::cout << "Formula NIJE ZADOVOLJIVA" << std::endl;
+        dnevnik << "Formula NIJE ZADOVOLJIVA";
+    }
 
     dnevnik << "Rad zavrsen";
-	std::cout << "Rad zavrsen" << std::endl;
-    //system("Pause");
+
+    if (interactiveMode)
+    {
+        std::cout << "Rad zavrsen" << std::endl;
+        system("Pause");
+    }
 }

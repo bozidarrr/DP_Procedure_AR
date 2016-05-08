@@ -6,15 +6,22 @@ KonzolniParser::~KonzolniParser(){}
 
 std::pair<Clause, bool> KonzolniParser::sledecaKlauza()
 {
-    std::string linija;
+    std::string linija = "";
     while (!std::cin.eof() && trim(linija).compare("") == 0)
     {
         std::cout << ">> ";
         std::getline(std::cin, linija);
     }
-    if (std::cin.eof())
+
+    linija = trim(linija);
+    if (linija.compare("#") == 0)
     {
         return std::make_pair(Clause(), false);
+    }
+    else if (linija.compare("@") == 0)
+    {
+        std::cout << "Prepoznata prazna klauza" << std::endl;
+        return std::make_pair(Clause(std::set<Literal>()), true);
     }
 
     std::stringstream ss(linija);
@@ -48,7 +55,8 @@ std::set<Clause> KonzolniParser::parsiraj()
     std::cout << "Elementi svake klauze treba da budu razdvojeni zarezima." << std::endl;
     std::cout << "Negacija se navodi kao '!' ispred date klauze" << std::endl;
     std::cout << "Ukoliko linija ne sadrzi nijedan literal, bice ignorisana" << std::endl;
-    std::cout << "Za kraj unosa, unesite EOF (CTRL+Z) i pritisnite taster enter" << std::endl;
+    std::cout << "Da biste uneli praznu klauzu, unesite '@' i pritisnite taster ENTER" << std::endl;
+    std::cout << "Za kraj unosa, unesite '#' i pritisnite taster enter" << std::endl;
     std::getline(std::cin, std::string());
     std::set<Clause> skupKlauza;
 

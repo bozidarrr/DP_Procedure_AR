@@ -1,14 +1,19 @@
 #include "Loger.h"
 #include <ctime>
 #include <sstream>
-Loger::Loger(std::string putanja, std::string aktivnost) :_pisac(putanja), _trenTip(TipPoruke::Info)
+Loger::Loger(std::string putanja, std::string aktivnost) :_lokacija(putanja), _pisac(putanja), _trenTip(TipPoruke::Info)
 {
-    _pisac << "[" << Loger::vremeSada() << "]: "<<aktivnost<< std::endl;
+    _pisac << "[" << Loger::vremeSada() << "]: " << aktivnost << std::endl;
 }
 
 Loger::~Loger()
 {
     _pisac.close();
+}
+
+std::string Loger::lokacija() const
+{
+    return _lokacija;
 }
 
 std::string Loger::vremeSada()

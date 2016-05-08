@@ -18,6 +18,18 @@
     <Text Include="ulaz1.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="ulaz2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ulaz3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ulaz4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ulaz5.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GlavniProgram.cpp">

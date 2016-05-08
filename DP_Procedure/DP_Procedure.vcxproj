@@ -89,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ulaz1.txt" />
+    <Text Include="ulaz2.txt" />
+    <Text Include="ulaz3.txt" />
+    <Text Include="ulaz4.txt" />
+    <Text Include="ulaz5.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FajlParser.h" />

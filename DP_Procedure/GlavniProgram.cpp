@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
     if (interaktivniMod)
     {
-        std::cout << listaKlauza << std::endl;
+        std::cout << "Prepoznata je lista klauza:" << std::endl << listaKlauza << std::endl;
     }
 
     bool zadovoljiva = listaKlauza.resolve();
@@ -132,6 +132,6 @@ int main(int argc, char *argv[])
 
     std::cout << "Rad zavrsen" << std::endl;
     std::cout << "Log fajl sa medjukoracima i rezultatom, moguce je pronaci na lokaciji" << std::endl << dnevnik.lokacija() << std::endl;
-    system("Pause");
+    //system("Pause");
     dnevnik << "Rad zavrsen";
 }

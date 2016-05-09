@@ -6,18 +6,7 @@ ClauseList::ClauseList()
 ClauseList::ClauseList(std::set<Clause> clauses) : clauses(clauses)
 {
 }
-/*
-void ClauseList::findPositiveLiterals()
-{
-for (Clause c : clauses)
-{
-for (Literal l : c.getPostiveLiterals())
-positiveLiterals.insert(l);
-//positiveLiterals.insert(c.getPostiveLiterals().begin(), c.getPostiveLiterals().end());
-}
-}
-*/
-// zapravo sve promenljive
+
 void ClauseList::findAllLiterals()
 {
     for (Clause c : clauses)
@@ -50,7 +39,6 @@ bool ClauseList::resolve()
 
 bool ClauseList::resolve(const Literal & l)
 {
-    //std::cout << "Resolving with literal : " << l << std::endl;
     std::set<Clause> C1, C2;
     if (!partition(l, C1, C2))
         return true;
@@ -91,41 +79,7 @@ bool ClauseList::removeClause(const Clause & c)
     clauses.erase(it);
     return true;
 }
-/*
-bool ClauseList::eliminatePureLiterals()
-{
-//remove pure literals from all clauses
-std::set<Literal> pureLiterals;
-for (Clause c : clauses)
-for (Literal l : c.getLiterals())
-{
-auto it = pureLiterals.find(l.getOpposite());
-if (it == pureLiterals.end())
-pureLiterals.insert(l);
-else
-pureLiterals.erase(it);
-}
 
-std::set<Clause> tmp;
-
-for (Clause c : clauses)
-{
-bool toAdd = true;
-for (Literal l : pureLiterals)
-{
-if (c.containsLiteral(l))
-{
-toAdd = false;
-break;
-}
-}
-if (toAdd)
-tmp.insert(c);
-}
-clauses = tmp;
-return true;
-}
-*/
 bool ClauseList::preprocess()
 {
     for (auto c : clauses)

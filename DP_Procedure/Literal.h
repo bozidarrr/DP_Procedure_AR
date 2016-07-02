@@ -88,4 +88,3 @@ private:
 	unsigned char _code;
 	bool _value;
 };
-

@@ -14,33 +14,33 @@ Sledece pretpostavke se uzimaju za ulazni fajl:
 class FajlParser : public Parser
 {
 public:
-    /**
-    Kreira parser za fajl na zadatoj putanji
-    */
-    FajlParser(std::string putanja);
+	/**
+	Kreira parser za fajl na zadatoj putanji
+	*/
+	FajlParser(std::string putanja);
 
-    /**
-    Unistava parser i zatvara fajl
-    */
-    ~FajlParser();
+	/**
+	Unistava parser i zatvara fajl
+	*/
+	~FajlParser();
 
-    /**
-    Vraca vrednost 'true' ako je parser spreman za rad; 'false' u suprotnom
-    */
-    bool spreman();
+	/**
+	Vraca vrednost 'true' ako je parser spreman za rad; 'false' u suprotnom
+	*/
+	bool spreman();
 
-    /**
-    Metod koji vraca skup klauzi, izvucenih na osnovu datog ulaznog fajla.
-    */
-    std::set<Clause> parsiraj();
+	/**
+	Metod koji vraca skup klauzi, izvucenih na osnovu datog ulaznog fajla.
+	*/
+	std::set<Clause> parsiraj();
 private:
-    /**
-    Metod koji vraca sledecu klauzu iz fajla kao prvi clan para.
-    Drugi clan ima vrednost 'false', ukoliko u fajlu ne postoji sledeca klauza. U tom slucaju treba ignorisati prvi parametar
-    */
-    std::pair<Clause,bool> sledecaKlauza();
-    
-    std::fstream _ulazniFajl;
-    
-    Loger _dnevnik;
+	/**
+	Metod koji vraca sledecu klauzu iz fajla kao prvi clan para.
+	Drugi clan ima vrednost 'false', ukoliko u fajlu ne postoji sledeca klauza. U tom slucaju treba ignorisati prvi parametar
+	*/
+	std::pair<Clause, bool> sledecaKlauza();
+
+	std::fstream _ulazniFajl;
+
+	Loger _dnevnik;
 };

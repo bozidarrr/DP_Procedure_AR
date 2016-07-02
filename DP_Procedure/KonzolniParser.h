@@ -14,11 +14,10 @@ Sledece pretpostavke se uzimaju za unos
 class KonzolniParser : public Parser
 {
 public:
-    KonzolniParser();
-    ~KonzolniParser();
-    bool spreman();
-    std::set<Clause> parsiraj();
+	KonzolniParser();
+	~KonzolniParser();
+	bool spreman();
+	std::set<Clause> parsiraj();
 private:
-    std::pair<Clause, bool> sledecaKlauza();
+	std::pair<Clause, bool> sledecaKlauza();
 };
-

@@ -41,7 +41,7 @@ bool fajlJeDostupan(const std::string & putanja)
  */
 int main(int argc, char *argv[])
 {
-	Loger dnevnik("..\\DP_proc.log", "DP procedura zapoceta");
+	Loger dnevnik("DP_proc_poboljsana.log", "DP procedura zapoceta");
 	std::cout << "Dobrodosli u program za demonstraciju DP procedure" << std::endl;
 	Parser * parser;
 	bool interaktivniMod = false;

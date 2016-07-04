@@ -7,8 +7,9 @@ namespace InstanceGenerator
 {
     class Program
     {
-        static bool KreirajTestInput(string lokacijaTesta, string imeTesta, int brojKutija, int brojKuglica)
+        static bool KreirajTestInput(string lokacijaTesta, string imeTesta, int brojKutija, int brojKuglica, string baseVariableName = "promenljiva")
         {
+            baseVariableName = baseVariableName.Trim();
             if (1 > brojKuglica || 1 > brojKutija)
                 return false;
 
@@ -29,16 +30,16 @@ namespace InstanceGenerator
                 pisac.WriteLine("; i da ni u jednoj kutiji ne bude vise od jedne kuglice");
                 pisac.WriteLine();
 
-                pisac.WriteLine("; Promenljiva xij nosi istinitosnu vrednost recenice: \"Kuglica sa rednim brojem i se nalazi u kutiji j\"");
+                pisac.WriteLine("; Promenljiva {0}_i_j nosi istinitosnu vrednost recenice: \"Kuglica sa rednim brojem i se nalazi u kutiji j\"", baseVariableName);
 
                 pisac.WriteLine("; Svaka kuglica je u nekoj od kutija");
                 // xi1 \/ xi2 \/ xi3 \/ ... \/ xin
                 for (int i = 1; i <= brojKuglica; i++)
                 {
-                    string formula = string.Format("x_{0}_{1}", i, 1);
+                    string formula = string.Format("{2}_{0}_{1}", i, 1, baseVariableName);
                     for (int j = 2; j <= brojKutija; j++)
                     {
-                        formula += string.Format(", x_{0}_{1}", i, j);
+                        formula += string.Format(", {2}_{0}_{1}", i, j, baseVariableName);
                     }
                     pisac.WriteLine(formula);
                 }
@@ -52,7 +53,7 @@ namespace InstanceGenerator
                     {
                         for (int k = j + 1; k < brojKuglica; k++)
                         {
-                            pisac.WriteLine("!x_{1}_{0}, !x_{2}_{0}", i, j, k);
+                            pisac.WriteLine("!{3}_{1}_{0}, !{3}_{2}_{0}", i, j, k,baseVariableName);
                         }
                     }
                 }
@@ -66,7 +67,7 @@ namespace InstanceGenerator
                     {
                         for (int k = j + 1; k < brojKutija; k++)
                         {
-                            pisac.WriteLine("!x_{0}_{1}, !x_{0}_{2}", i, j, k);
+                            pisac.WriteLine("!{3}_{0}_{1}, !{3}_{0}_{2}", i, j, k, baseVariableName);
                         }
                     }
                 }

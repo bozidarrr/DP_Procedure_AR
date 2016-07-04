@@ -7,7 +7,7 @@ namespace InstanceGenerator
 {
     class Program
     {
-        static bool KreirajTestInput(string lokacijaTesta, string imeTesta, int brojKutija, int brojKuglica, string baseVariableName = "promenljiva")
+        static bool KreirajTestInput(string lokacijaTesta, string imeTesta, int brojKutija, int brojKuglica, string baseVariableName = "x")
         {
             baseVariableName = baseVariableName.Trim();
             if (1 > brojKuglica || 1 > brojKutija)
@@ -81,6 +81,7 @@ namespace InstanceGenerator
         static void Main(string[] args)
         {
             string lokacijaTesta = ConfigurationManager.AppSettings["lokacija"];
+            string imePromenljive = ConfigurationManager.AppSettings["imePromenljive"];
 
             if (!Directory.Exists(lokacijaTesta))
             {
@@ -91,7 +92,7 @@ namespace InstanceGenerator
 
             Console.WriteLine("Kreiranje testova");
 
-            foreach (var test in ConfigurationManager.AppSettings.AllKeys.Where(key => !key.Equals("lokacija", StringComparison.InvariantCultureIgnoreCase)).Select(key => ConfigurationManager.AppSettings[key]).ToArray())
+            foreach (var test in ConfigurationManager.AppSettings.AllKeys.Where(key => (!key.Equals("lokacija", StringComparison.InvariantCultureIgnoreCase) && !key.Equals("imePromenljive"))).Select(key => ConfigurationManager.AppSettings[key]).ToArray())
             {
                 var podaci = test.Split(',');
                 if (podaci == null || podaci.Length < 3)
@@ -109,7 +110,7 @@ namespace InstanceGenerator
                     continue;
                 }
 
-                if (!KreirajTestInput(lokacijaTesta, imeTesta, brojKutija, brojKuglica))
+                if (!KreirajTestInput(lokacijaTesta, imeTesta, brojKutija, brojKuglica,imePromenljive))
                 {
                     Console.WriteLine("Greska pri kreiranju testa {0} na lokaciji {1}", imeTesta, lokacijaTesta);
                     continue;
